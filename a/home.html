@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tài khoản Google</title>
+    <link href="https://fonts.googleapis.com/css2?family=Google+Sans:wght@400;500&family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style-home.css">
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="logo">Google Tài khoản</div>
+        <div class="header-right">
+            <button class="icon-btn search">Tìm kiếm</button>
+            <button class="icon-btn help">Trợ giúp</button>
+            <button class="icon-btn more">Hơn</button>
+            
+            <!-- Nút Đăng xuất -->
+            <button id="logoutBtn" class="logout-btn">Đăng xuất</button>
+            
+            <div class="avatar">
+                <img id="userAvatar" src="" alt="Avatar">
+            </div>
+        </div>
+    </header>
+
+    <!-- Phần còn lại giữ nguyên như cũ -->
+    <div class="main">
+        <aside class="sidebar">
+            <a href="#" class="active">Trang chủ</a>
+            <a href="#">Thông tin cá nhân</a>
+            <a href="#">Dữ liệu và quyền riêng tư</a>
+            <a href="#">Bảo mật</a>
+            <a href="#">Mọi người và chia sẻ</a>
+            <a href="#">Thanh toán và gói thuê bao</a>
+            <a href="#">Giới thiệu</a>
+        </aside>
+
+        <main class="content">
+            <div class="welcome">
+                <div class="user-info">
+                    <img id="bigAvatar" src="" alt="Avatar" class="big-avatar">
+                    <h1>Xin chào <span id="userName">Trần Hưng</span></h1>
+                    <p>Quản lý thông tin, quyền riêng tư và chế độ bảo mật để Google hoạt động hiệu quả cho bạn. <a href="#">Tìm hiểu thêm</a></p>
+                </div>
+            </div>
+
+            <div class="cards">
+                <div class="card">
+                    <button class="close">×</button>
+                    <h3>Đừng để bị mất quyền truy cập vào Tài khoản Google của bạn</h3>
+                    <p>Hãy thêm tùy chọn khôi phục thứ hai để đảm bảo bạn luôn có quyền truy cập...</p>
+                    <button class="blue-btn">Thêm email khôi phục</button>
+                </div>
+                <div class="card">
+                    <button class="close">×</button>
+                    <h3>Đặt địa chỉ nhà riêng cho Tài khoản Google của bạn</h3>
+                    <p>Nhấn kết quả tìm kiếm, thông tin thời tiết và kết quả tìm kiếm trên bản đồ phù hợp hơn</p>
+                    <button class="blue-btn">Đặt địa chỉ nhà riêng</button>
+                </div>
+            </div>
+
+            <div class="bottom-search">
+                <div class="search-box">
+                    <span>Tìm trong Tài khoản Google</span>
+                </div>
+                <div class="quick-links">
+                    <a href="#">Mật khẩu của tôi</a>
+                    <a href="#">Thiết bị</a>
+                    <a href="#">Trình quản lý mật khẩu</a>
+                    <a href="#">Hoạt động của tôi</a>
+                    <a href="#">Email</a>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        // Kiểm tra đăng nhập
+        if (localStorage.getItem('loggedIn') !== 'true') {
+            window.location.href = 'login.html';
+        }
+
+        const userEmail = localStorage.getItem('user') || 'admin@gmail.com';
+        const userName = userEmail.split('@')[0].replace('.', ' ').replace(/\b\w/g, l => l.toUpperCase());
+
+        document.getElementById('userName').textContent = userName;
+        document.title = `Tài khoản Google - ${userName}`;
+
+        // Avatar (thay link ảnh bạn thích)
+        const avatarUrl = "https://anhcute.net/wp-content/uploads/2024/11/meme-cuu-duoc.jpg";
+        document.getElementById('userAvatar').src = avatarUrl;
+        document.getElementById('bigAvatar').src = avatarUrl;
+
+        // Đóng thẻ thông báo
+        document.querySelectorAll('.close').forEach(btn => {
+            btn.onclick = () => btn.parentElement.style.display = 'none';
+        });
+
+        // === CHỨC NĂNG ĐĂNG XUẤT ===
+        document.getElementById('logoutBtn').addEventListener('click', function() {
+            if (confirm('Bạn có chắc muốn đăng xuất không?')) {
+                localStorage.removeItem('loggedIn');
+                localStorage.removeItem('user');
+                alert('Đã đăng xuất thành công!');
+                window.location.href = 'login.html';
+            }
+        });
+    </script>
+</body>
+</html>

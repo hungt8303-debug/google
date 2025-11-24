@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Đăng nhập • Tài khoản Google</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="main-container">
+        <div class="card">
+            <!-- Logo Google -->
+            <div class="logo">
+                <img src="https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_92x30dp.png" alt="Google">
+            </div>
+
+            <h1>Đăng nhập</h1>
+            <p class="subtitle">Sử dụng Tài khoản Google của bạn</p>
+
+            <!-- Bước 1: Nhập email -->
+            <div id="emailStep">
+                <div class="input-group">
+                    <input type="text" id="emailInput" placeholder=" " autocomplete="username" required>
+                    <label>Email hoặc số điện thoại</label>
+                </div>
+
+                <div class="actions">
+                    <a href="#" class="create-link">Tạo tài khoản</a>
+                    <button id="nextBtn">Tiếp theo</button>
+                </div>
+
+                <div class="help-link">
+                    <a href="#">Quên địa chỉ email?</a>
+                </div>
+            </div>
+
+            <!-- Bước 2: Nhập mật khẩu (ban đầu ẩn) -->
+            <div id="passwordStep" class="hidden">
+                <div class="profile">
+                    <div class="avatar">A</div>
+                    <h2 id="userEmail">admin@gmail.com</h2>
+                    <p>Tài khoản Google</p>
+                </div>
+
+                <div class="input-group">
+                    <input type="password" id="passwordInput" placeholder=" " autocomplete="current-password" required>
+                    <label>Nhập mật khẩu</label>
+                    <span class="show-pass" id="showPass">Hiển thị mật khẩu</span>
+                </div>
+
+                <div class="help-link">
+                    <a href="#">Quên mật khẩu?</a>
+                </div>
+
+                <div class="actions">
+                    <button type="button" id="backBtn" class="text-btn">Quay lại</button>
+                    <button id="loginBtn">Đăng nhập</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const emailStep = document.getElementById('emailStep');
+        const passwordStep = document.getElementById('passwordStep');
+        const emailInput = document.getElementById('emailInput');
+        const passwordInput = document.getElementById('passwordInput');
+        const userEmail = document.getElementById('userEmail');
+        const nextBtn = document.getElementById('nextBtn');
+        const loginBtn = document.getElementById('loginBtn');
+        const backBtn = document.getElementById('backBtn');
+        const showPass = document.getElementById('showPass');
+
+        // Bước 1 → Bước 2
+        nextBtn.addEventListener('click', () => {
+            let email = emailInput.value.trim();
+            if (!email) email = 'admin@gmail.com';
+
+            if (!email.includes('admin') && email !== 'admin@gmail.com' && email !== 'admin') {
+                alert('Tài khoản không đúng! Hãy dùng: admin hoặc admin@gmail.com');
+                return;
+            }
+
+            // Hiển thị email
+            userEmail.textContent = email.includes('@') ? email : 'admin@gmail.com';
+
+            // Chuyển sang bước mật khẩu
+            emailStep.classList.add('hidden');
+            passwordStep.classList.remove('hidden');
+            passwordInput.focus();
+        });
+
+        // Hiển thị/ẩn mật khẩu
+        showPass.addEventListener('click', () => {
+            if (passwordInput.type === 'password') {
+                passwordInput.type = 'text';
+                showPass.textContent = 'Ẩn mật khẩu';
+            } else {
+                passwordInput.type = 'password';
+                showPass.textContent = 'Hiển thị mật khẩu';
+            }
+        });
+
+        // Đăng nhập thành công
+        loginBtn.addEventListener('click', () => {
+            if (passwordInput.value === '123') {
+                localStorage.setItem('loggedIn', 'true');
+                localStorage.setItem('user', userEmail.textContent);
+                window.location.href = 'home.html';
+            } else {
+                alert('Sai mật khẩu! Mật khẩu đúng là: 123');
+            }
+        });
+
+        // Quay lại bước email
+        backBtn.addEventListener('click', () => {
+            passwordStep.classList.add('hidden');
+            emailStep.classList.remove('hidden');
+            passwordInput.value = '';
+            passwordInput.type = 'password';
+            showPass.textContent = 'Hiển thị mật khẩu';
+            emailInput.focus();
+        });
+
+        // Nhấn Enter ở email → Tiếp theo
+        emailInput.addEventListener('keypress', e => {
+            if (e.key === 'Enter') nextBtn.click();
+        });
+
+        // Nhấn Enter ở mật khẩu → Đăng nhập
+        passwordInput.addEventListener('keypress', e => {
+            if (e.key === 'Enter') loginBtn.click();
+        });
+    </script>
+</body>
+</html>

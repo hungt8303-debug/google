@@ -1,0 +1,130 @@
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+html, body {
+    height: 100%;
+    font-family: 'Roboto', Arial, sans-serif;
+    background: #fff;
+    color: #202124;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 20px;
+}
+
+.main-container {
+    width: 100%;
+    max-width: 448px;
+}
+
+.card {
+    background: white;
+    border: 1px solid #dadce0;
+    border-radius: 8px;
+    padding: 48px 40px 36px;
+    text-align: center;
+    box-shadow: 0 1px 6px rgba(32,33,36,.28);
+}
+
+.logo img { height: 92px; margin-bottom: 20px; }
+h1 { font-size: 24px; font-weight: 400; margin-bottom: 8px; }
+.subtitle { color: #5f6368; font-size: 16px; margin-bottom: 32px; }
+
+/* Input group */
+.input-group {
+    position: relative;
+    margin: 28px 0;
+}
+.input-group input {
+    width: 100%;
+    padding: 13px 15px;
+    font-size: 16px;
+    border: 1px solid #dadce0;
+    border-radius: 4px;
+    outline: none;
+}
+.input-group input:focus {
+    border-color: #1a73e8;
+    box-shadow: 0 0 0 2px rgba(26,115,232,.2);
+}
+.input-group label {
+    position: absolute;
+    left: 15px; top: 15px;
+    color: #80868b;
+    font-size: 16px;
+    pointer-events: none;
+    transition: 0.2s ease all;
+    background: white;
+}
+.input-group input:focus ~ label,
+.input-group input:not(:placeholder-shown) ~ label {
+    top: -8px;
+    left: 12px;
+    font-size: 12px;
+    color: #1a73e8;
+    padding: 0 4px;
+}
+
+.show-pass {
+    position: absolute;
+    right: 12px; top: 15px;
+    color: #1a73e8;
+    font-size: 14px;
+    cursor: pointer;
+    font-weight: 500;
+}
+
+/* Actions */
+.actions {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 40px;
+}
+.create-link, .text-btn {
+    color: #1a73e8;
+    font-weight: 500;
+    text-decoration: none;
+    font-size: 14px;
+}
+.text-btn { background: none; border: none; cursor: pointer; padding: 0; }
+button {
+    background: #1a73e8;
+    color: white;
+    border: none;
+    padding: 10px 24px;
+    border-radius: 4px;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+}
+button:hover { background: #1669c1; }
+
+.help-link { text-align: left; margin-top: 20px; }
+.help-link a { color: #1a73e8; text-decoration: none; font-size: 14px; }
+.help-link a:hover { text-decoration: underline; }
+
+.hidden { display: none !important; }
+
+/* Avatar & Profile */
+.profile {
+    text-align: center;
+    margin-bottom: 32px;
+}
+.avatar {
+    width: 72px; height: 72px;
+    background: #1a73e8;
+    color: white;
+    border-radius: 50%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 32px;
+    font-weight: bold;
+    margin-bottom: 12px;
+}
+#userEmail { font-size: 20px; margin: 8px 0; }
+.profile p { color: #5f6368; font-size: 14px; }
